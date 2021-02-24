@@ -12,9 +12,9 @@ var images = [];
 var drawFunction;
 
 //Line 1 text offset
-var gTextOffset = 40; //change number here to adjust space from thebottom
+var gTextOffset = 65; //change number here to adjust space from thebottom
 //Line 2 text offset
-var hTextOffset = 30;
+var hTextOffset = 40;
 
 //furniture img + preload
 function preload() {
@@ -30,7 +30,7 @@ function preload() {
 }
 // Setup code goes here
 function setup() {
-    createCanvas(windowWidth, windowWidth);
+    createCanvas(windowWidth, windowHeight);
 
 
     //centering the text and images
@@ -60,7 +60,7 @@ drawSplash = function() {
 
 //Instructions 
 drawInstructions = function() {
-    background = ('#4f5f17');
+    background ('#4f5f17');
     fill(255);
     text("Let me show you around! On each page, follow the instruction to go from room to room.", width / 2, height - gTextOffset);
     text(" Start by pressing L to go to the Living room!", width / 2, height - hTextOffset);
@@ -68,7 +68,7 @@ drawInstructions = function() {
 
 //Living Room 
 drawLiving = function() {
-    background = ('#ccc1cf')
+    background ('#ccc1cf')
     image(images[1], width / 2, height / 2);
     fill(255);
     text("Welcome to the Living Room! Get cozy. Let me know if you need anything", width / 2, height - gTextOffset);
@@ -78,7 +78,7 @@ drawLiving = function() {
 
 //Dining Room
 drawDining = function() {
-    background = ('#204eec')
+    background ('#204eec')
     image(images[2], width / 2, height / 2);
     fill(255);
     text("Welcome to the Dining Room ! Can I get you some water?", width / 2, height - gTextOffset);
@@ -88,9 +88,9 @@ drawDining = function() {
 
 //Kitchen 
 drawKitchen = function() {
-    background = ('#ede7db')
+    background ('#ede7db')
     image(images[3], width / 2, height / 2);
-    fill(255);
+    fill('#4f5f17');
     text("Welcome to the Kitchen! Would you like a snack?", width / 2, height - gTextOffset);
     text("Press G for the garden or E for the Bedroom", width / 2, height - hTextOffset);
 
@@ -98,17 +98,16 @@ drawKitchen = function() {
 
 //Bedroom
 drawBedroom = function() {
-    background = ('#efcaa6')
+    background ('#efcaa6')
     image(images[4], width / 2, height / 2);
-    fill(255);
-
+    fill('#4f5f17');
     text("Welcome to my bedroom. Naps are always welcome.", width / 2, height - gTextOffset);
     text("Press L for living Room or G for the Garden", width / 2, height - hTextOffset);
 }
 
 //Bathroom
 drawBathroom = function() {
-    background = ('#ac83ca')
+    background ('#ac83ca')
     image(images[5], width / 2, height / 2);
     fill(255);
     text("This is the bathroom. I... will leave you to do your business...", width / 2, height - gTextOffset);
@@ -117,7 +116,7 @@ drawBathroom = function() {
 
 //Arcade
 drawArcade = function() {
-    background = ('#f6a0d4')
+    background ('#f6a0d4')
     image(images[6], width / 2, height / 2);
     fill(255);
     text("HEY WELCOME TO THE ARCADE!!!! SORRY IF ITS LOUD. GO HAVE FUN!", width / 2, height - gTextOffset);
@@ -126,12 +125,13 @@ drawArcade = function() {
 
 //Garden
 drawGarden = function() {
-    background = ('##4f5f17')
+    background ('#4f5f17')
     image(images[7], width / 2, height / 2);
     fill(255);
     text("hello. welcome to the garden. you may pick some flowers but leave the lavenders for the bees please!", width / 2, height - gTextOffset);
     text("Press H to go to the front of the house or L for the Livingroom", width / 2, height - hTextOffset);
 }
+
 
 //navigation key function
 function keyTyped() {
@@ -149,66 +149,66 @@ function keyTyped() {
         }
     }
 
-    //living room controls
+        //living room controls
 
-    if (drawFunction === drawLiving) {
-        if (key === 'd') {
-            drawFunction = drawDining;
-        } else if (key === 'b') {
-            drawFunction = drawBathroom;
+        if (drawFunction === drawLiving) {
+            if (key === 'd') {
+                drawFunction = drawDining;
+            } else if (key === 'b') {
+                drawFunction = drawBathroom;
+            }
+        }
+
+        //arcade room controls
+        if (drawFunction === drawArcade) {
+            if (key === 'b') {
+                drawFunction = drawBathroom;
+            } else if (key === 'e') {
+                drawFunction = drawBedroom;
+            }
+        }
+
+        //bedroom controls
+        if (drawFunction === drawBedroom) {
+            if (key === 'g') {
+                drawFunction = drawGarden;
+            } else if (key === 'l') {
+                drawFunction = drawLiving;
+            }
+        }
+
+        //bathroom controls
+        if (drawFunction === drawBathroom) {
+            if (key === 'd') {
+                drawFunction = drawDining;
+            } else if (key === 'e') {
+                drawFunction = drawBedroom;
+            }
+        }
+
+        //dining room controls
+        if (drawFunction === drawDining) {
+            if (key === 'k') {
+                drawFunction = drawKitchen;
+            } else if (key === 'a') {
+                drawFunction = drawArcade;
+            }
+        }
+
+        //kitchen controls
+        if (drawFunction === drawKitchen) {
+            if (key === 'g') {
+                drawFunction = drawGarden;
+            } else if (key === 'e') {
+                drawFunction = drawBedroom;
+            }
+        }
+
+        if (drawFunction === drawGarden) {
+            if (key === 'h') {
+                drawFunction = drawSplash;
+            } else if (key === 'l') {
+                drawFunction = drawLiving;
+            }
         }
     }
-
-    //arcade room controls
-    if (drawFunction === drawArcade) {
-        if (key === 'b') {
-            drawFunction = drawBathroom;
-        } else if (key === 'e') {
-            drawFunction = drawBedroom;
-        }
-    }
-
-    //bedroom controls
-    if (drawFunction === drawBedroom) {
-        if (key === 'g') {
-            drawFunction = drawGarden;
-        } else if (key === 'l') {
-            drawFunction = drawLiving;
-        }
-    }
-
-    //bathroom controls
-    if (drawFunction === drawBathroom) {
-        if (key === 'd') {
-            drawFunction = drawDining;
-        } else if (key === 'e') {
-            drawFunction = drawBedroom;
-        }
-    }
-
-    //dining room controls
-    if (drawFunction === drawDining) {
-        if (key === 'k') {
-            drawFunction = drawKitchen;
-        } else if (key === 'a') {
-            drawFunction = drawArcade;
-        }
-    }
-
-    //kitchen controls
-    if (drawFunction === drawKitchen) {
-        if (key === 'g') {
-            drawFunction = drawGarden;
-        } else if (key === 'e') {
-            drawFunction = drawBedroom;
-        }
-    }
-
-    if (drawFunction === drawGarden) {
-        if (key === 'h') {
-            drawFunction = drawSplash;
-        } else if (key === 'l') {
-            drawFunction = drawLiving;
-        }
-    }
-}
